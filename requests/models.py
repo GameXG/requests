@@ -936,6 +936,9 @@ class Response(object):
         elif 500 <= self.status_code < 600:
             http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)
 
+        if self.content:
+            http_error_msg += u" content: %s" % self.content.decode("utf-8")
+            
         if http_error_msg:
             raise HTTPError(http_error_msg, response=self)
 
